@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Turnamen Free Fire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --bg-input: #2a2a2a;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-yellow: #ffcc00;
+            --accent-orange: #ff6600;
+            --accent-red: #e74c3c;
+            --accent-green: #2ecc71;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding-bottom: 40px;
+        }
+
+        /* HEADER BANNER */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .banner-logo {
+            font-size: 50px;
+            color: var(--accent-red);
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(231, 76, 60, 0.8);
+        }
+
+        .banner h1 {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .slot-counter {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .btn-register {
+            background: linear-gradient(90deg, var(--accent-red), #c0392b);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn-register:hover { transform: scale(1.05); }
+
+        /* CONTAINER */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* CARD UMUM */
+        .info-card, .extra-section, .member-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .info-card h2, .extra-section h3, .member-card h3 {
+            font-size: 18px;
+            color: var(--accent-yellow);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .member-card h3 { font-size: 16px; }
+
+        .info-list p { font-size: 14px; margin-bottom: 8px; line-height: 1.5; }
+        .info-list span { color: var(--text-muted); }
+        .highlight-red { color: var(--accent-red); font-weight: 700; }
+        .highlight-green { color: var(--accent-green); font-weight: 700; }
+        .highlight-yellow { color: var(--accent-yellow); font-weight: 700; }
+
+        .divider { height: 1px; background-color: var(--border-color); margin: 15px 0; }
+
+        .rules-list { list-style: none; }
+        .rules-list li {
+            font-size: 14px; margin-bottom: 8px; position: relative;
+            padding-left: 20px; color: var(--text-muted);
+        }
+        .rules-list li::before {
+            content: "•"; color: var(--accent-yellow);
+            position: absolute; left: 0; font-size: 20px; line-height: 1;
+        }
+
+        /* HADIAH BOX */
+        .prize-box {
+            background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(255, 102, 0, 0.15));
+            border: 1px solid var(--accent-yellow);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .prize-box .prize-title {
+            font-size: 12px;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .prize-box .prize-value {
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 3px;
+        }
+
+        .prize-box .prize-note {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* FORM INPUT */
+        .input-group { display: flex; gap: 10px; }
+        .input-wrapper { flex: 1; display: flex; flex-direction: column; }
+
+        .input-wrapper label {
+            font-size: 12px; color: var(--text-muted); margin-bottom: 5px;
+        }
+
+        .input-wrapper input, .input-wrapper select, .input-wrapper textarea {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .input-wrapper input:focus, .input-wrapper select:focus, .input-wrapper textarea:focus {
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
+        }
+
+        .input-wrapper textarea { resize: vertical; min-height: 80px; }
+
+        /* CHECKBOX */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 15px;
+            background-color: rgba(255, 204, 0, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--accent-yellow);
+            width: 18px; height: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .checkbox-group label strong { color: var(--accent-red); }
+
+        /* SUBMIT BUTTON */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(90deg, var(--accent-yellow), var(--accent-orange));
+            color: #000;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.6);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* FOOTER */
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        .btn-wa {
+            display: block;
+            text-align: center;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-wa:hover { background-color: #1ebe5d; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER BANNER -->
+    <header class="banner">
+        <div class="banner-logo">🔥</div>
+        <div class="slot-counter">Sisa 12 Slot dari 50</div>
+        <h1>FREE FIRE TOURNAMENT</h1>
+        <button class="btn-register" onclick="document.getElementById('form-pendaftaran').scrollIntoView({behavior: 'smooth'})">DAFTAR GRATIS</button>
+    </header>
+
+    <div class="container">
+
+        <!-- INFORMASI TOURNAMENT -->
+        <div class="info-card">
+            <h2>INFORMASI TOURNAMENT</h2>
+            <div class="info-list">
+                <p><span>Tanggal Main :</span> 1 Oktober 2026</p>
+                <p><span>Biaya :</span> <strong class="highlight-green">100% GRATIS</strong></p>
+                <p><span>Slot Team :</span> <strong class="highlight-red">Terbatas, keburu habis!</strong></p>
+                <p><span>Mode :</span> Squad (4 Player)</p>
+                <p><span>Map :</span> Bermuda / Kalahari / Purgatory</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>🏆 HADIAH PEMENANG</h2>
+            <div class="prize-box">
+                <div class="prize-title">Juara 1 (1 Tim / 4 Orang)</div>
+                <div class="prize-value">💎 5000 Diamond / Orang</div>
+                <div class="prize-value">💰 Rp 250.000 Tunai / Orang</div>
+                <div class="prize-note">Total hadiah untuk 1 tim: 20.000 Diamond + Rp 1.000.000</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Peraturan Penting:</h2>
+            <ul class="rules-list">
+                <li>Dilarang menggunakan cheat / hack / emulator</li>
+                <li>Wajib hadir 15 menit sebelum match</li>
+                <li>Nickname harus sesuai saat daftar</li>
+                <li>Dilarang toxic / kata kotor di chat</li>
+                <li>Keputusan panitia tidak bisa diganggu gugat</li>
+            </ul>
+        </div>
+
+        <!-- FORMULIR PENDAFTARAN -->
+        <form id="form-pendaftaran" action="https://formsubmit.co/vivoceluler104@gmail.com" method="POST">
+
+            <!-- Hidden FormSubmit config -->
+            <input type="hidden" name="_subject" value="Pendaftaran Turnamen Free Fire Baru!">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <!-- ============================================ -->
+            <!-- DATA AKUN PESERTA (KAPTEN) -->
+            <!-- ============================================ -->
+            <div class="extra-section">
+                <h3>🔐 Data Akun Kapten</h3>
+
+                <div class="input-wrapper" style="margin-bottom: 15px;">
+                    <label>Email Aktif <span style="color: var(--accent-red);">*</span></label>
+                    <input type="email" name="Email_Kapten" placeholder="contoh@gmail.com" required>
+                </div>
+
+                <div class="input-wrapper" style="margin-bottom: 15px;">
+                    <label>Password Akun Turnamen <span style="color: var(--accent-red);">*</span></label>
+                    <input type="password" name="Password_Kapten" placeholder="Minimal 6 karakter" minlength="6" required>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <div class="input-wrapper">
+                        <label>Level Akun <span style="color: var(--accent-red);">*</span></label>
+                        <select name="Level_Kapten" required>
+                            <option value="" disabled selected>-- Pilih Level --</option>
+                            <option value="Level 1 - 20">Level 1 - 20</option>
+                            <option value="Level 21 - 40">Level 21 - 40</option>
+                            <option value="Level 41 - 60">Level 41 - 60</option>
+                            <option value="Level 61 - 80">Level 61 - 80</option>
+                            <option value="Level 81 - 100">Level 81 - 100</option>
+                        </select>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Rank Akun <span style="color: var(--accent-red);">*</span></label>
+                        <select name="Rank_Kapten" required>
+                            <option value="" disabled selected>-- Pilih Rank --</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Platinum">Platinum</option>
+                            <option value="Diamond">Diamond</option>
+                            <option value="Heroic">Heroic</option>
+                            <option value="Grandmaster">Grandmaster</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Nomor WhatsApp Aktif <span style="color: var(--accent-red);">*</span></label>
+                    <input type="tel" name="No_WA_Kapten" placeholder="Contoh: 08123456789" required>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DATA TIM -->
+            <!-- ============================================ -->
+            <div class="extra-section">
+                <h3>📋 Data Tim</h3>
+
+                <div class="input-wrapper" style="margin-bottom: 15px;">
+                    <label>Nama Tim <span style="color: var(--accent-red);">*</span></label>
+                    <input type="text" name="Nama_Tim" placeholder="Contoh: Garuda Esport" required>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <div class="input-wrapper">
+                        <label>Total Level Tim (Rata-rata)</label>
+                        <input type="text" name="Rata_Level_Tim" placeholder="Contoh: 65">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Rank Tim (Tertinggi)</label>
+                        <input type="text" name="Rank_Tim" placeholder="Contoh: Grandmaster">
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Username Instagram / TikTok (Opsional)</label>
+                    <input type="text" name="Sosmed" placeholder="@username">
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DATA MEMBER 1 (KAPTEN) -->
+            <!-- ============================================ -->
+            <div class="member-card">
+                <h3>👤 MEMBER 1 (Kapten)</h3>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label>ID Free Fire</label>
+                        <input type="text" name="Member_1_ID" placeholder="Contoh: 123456789" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Nickname</label>
+                        <input type="text" name="Member_1_Nickname" placeholder="Contoh: ProPlayer" required>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <div class="input-wrapper">
+                        <label>Level</label>
+                        <input type="text" name="Member_1_Level" placeholder="Contoh: 65" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Rank</label>
+                        <input type="text" name="Member_1_Rank" placeholder="Contoh: Grandmaster" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DATA MEMBER 2 -->
+            <!-- ============================================ -->
+            <div class="member-card">
+                <h3>👤 MEMBER 2</h3>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label>ID Free Fire</label>
+                        <input type="text" name="Member_2_ID" placeholder="Contoh: 123456789" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Nickname</label>
+                        <input type="text" name="Member_2_Nickname" placeholder="Contoh: ProPlayer" required>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <div class="input-wrapper">
+                        <label>Level</label>
+                        <input type="text" name="Member_2_Level" placeholder="Contoh: 60" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Rank</label>
+                        <input type="text" name="Member_2_Rank" placeholder="Contoh: Heroic" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DATA MEMBER 3 -->
+            <!-- ============================================ -->
+            <div class="member-card">
+                <h3>👤 MEMBER 3</h3>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label>ID Free Fire</label>
+                        <input type="text" name="Member_3_ID" placeholder="Contoh: 123456789" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Nickname</label>
+                        <input type="text" name="Member_3_Nickname" placeholder="Contoh: ProPlayer" required>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <div class="input-wrapper">
+                        <label>Level</label>
+                        <input type="text" name="Member_3_Level" placeholder="Contoh: 55" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Rank</label>
+                        <input type="text" name="Member_3_Rank" placeholder="Contoh: Diamond" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DATA MEMBER 4 -->
+            <!-- ============================================ -->
+            <div class="member-card">
+                <h3>👤 MEMBER 4</h3>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label>ID Free Fire</label>
+                        <input type="text" name="Member_4_ID" placeholder="Contoh: 123456789" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Nickname</label>
+                        <input type="text" name="Member_4_Nickname" placeholder="Contoh: ProPlayer" required>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 10px;">
+                    <div class="input-wrapper">
+                        <label>Level</label>
+                        <input type="text" name="Member_4_Level" placeholder="Contoh: 50" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Rank</label>
+                        <input type="text" name="Member_4_Rank" placeholder="Contoh: Platinum" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PREFERENSI & PERSETUJUAN -->
+            <!-- ============================================ -->
+            <div class="extra-section">
+                <h3>⚙️ Preferensi & Persetujuan</h3>
+
+                <div class="input-wrapper" style="margin-bottom: 15px;">
+                    <label>Pilih Sesi Bermain</label>
+                    <select name="Sesi_Bermain" required>
+                        <option value="" disabled selected>-- Pilih Sesi --</option>
+                        <option value="Sesi 1 (13:00 WIB)">Sesi 1 (13:00 WIB)</option>
+                        <option value="Sesi 2 (19:00 WIB)">Sesi 2 (19:00 WIB)</option>
+                        <option value="Fleksibel / Kapan Saja">Fleksibel / Kapan Saja</option>
+                    </select>
+                </div>
+
+                <div class="input-wrapper" style="margin-bottom: 15px;">
+                    <label>Pilih Map Favorit (Voting)</label>
+                    <select name="Map_Favorit">
+                        <option value="" disabled selected>-- Pilih Map --</option>
+                        <option value="Bermuda">Bermuda</option>
+                        <option value="Kalahari">Kalahari</option>
+                        <option value="Purgatory">Purgatory</option>
+                        <option value="Alpine">Alpine</option>
+                    </select>
+                </div>
+
+                <div class="input-wrapper" style="margin-bottom: 15px;">
+                    <label>Dari mana kamu tahu turnamen ini?</label>
+                    <select name="Sumber_Info">
+                        <option value="" disabled selected>-- Pilih Sumber --</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="TikTok">TikTok</option>
+                        <option value="Teman / Grup WA">Teman / Grup WA</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Pesan / Alasan Ikut Turnamen (Opsional)</label>
+                    <textarea name="Pesan_Tambahan" placeholder="Contoh: Kami tim baru, mohon bimbingannya!"></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="setuju" name="Setuju_Peraturan" value="Ya" required>
+                    <label for="setuju">
+                        Saya dan tim saya menyetujui seluruh peraturan turnamen. 
+                        <strong>Data akun (Email, Password, Level, Rank) yang saya isi adalah benar dan bersedia dicek oleh panitia. Jika terbukti fake/cheat, tim didiskualifikasi.</strong>
+                    </label>
+                </div>
+            </div>
+
+            <!-- TOMBOL SUBMIT -->
+            <button type="submit" class="btn-submit" id="btnSubmit">🚀 JOIN TOURNAMENT (GRATIS)</button>
+
+            <a href="https://wa.me/6281234567890?text=Halo%20Panitia%2C%20saya%20mau%20tanya%20soal%20turnamen%20Free%20Fire" target="_blank" class="btn-wa">
+                💬 Hubungi Panitia via WhatsApp
+            </a>
+
+            <p class="footer-text">Unofficial Event • Community Tournament Free Fire</p>
+        </form>
+    </div>
+
+    <!-- SCRIPT VALIDASI & UX -->
+    <script>
+        const form = document.getElementById('form-pendaftaran');
+        const btnSubmit = document.getElementById('btnSubmit');
+
+        form.addEventListener('submit', function(e) {
+            // 1. Validasi semua input teks & tel yang required
+            const inputs = this.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"], input[type="password"]');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if(input.value.trim() === '' && input.hasAttribute('required')) {
+                    valid = false;
+                    input.style.borderColor = 'red';
+                } else {
+                    input.style.borderColor = 'var(--border-color)';
+                }
+            });
+
+            // 2. Validasi dropdown select yang required
+            const selects = this.querySelectorAll('select[required]');
+            selects.forEach(select => {
+                if(select.value === '') {
+                    valid = false;
+                    select.style.borderColor = 'red';
+                } else {
+                    select.style.borderColor = 'var(--border-color)';
+                }
+            });
+
+            // 3. Validasi checkbox persetujuan
+            const checkbox = document.getElementById('setuju');
+            if (!checkbox.checked) {
+                valid = false;
+                alert('Kamu harus menyetujui peraturan turnamen sebelum mendaftar!');
+            }
+
+            // 4. Jika tidak valid, cegah submit
+            if(!valid) {
+                e.preventDefault();
+                alert('Mohon lengkapi semua data yang wajib diisi (bertanda *).');
+            } else {
+                // Ubah tombol jadi loading
+                btnSubmit.innerHTML = '⏳ MENGIRIM DATA...';
+                btnSubmit.disabled = true;
+                btnSubmit.style.opacity = '0.7';
+            }
+        });
+
+        // Reset border merah saat user mulai mengetik
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', function() {
+                this.style.borderColor = 'var(--border-color)';
+            });
+        });
+    </script>
+
+</body>
+</html>
